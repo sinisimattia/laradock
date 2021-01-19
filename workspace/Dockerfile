@@ -199,6 +199,14 @@ COPY ./crontab /etc/cron.d
 RUN chmod -R 644 /etc/cron.d
 
 ###########################################################################
+# Update Repositories
+###########################################################################
+
+USER root
+
+RUN apt-get update -yqq
+
+###########################################################################
 # Drush:
 ###########################################################################
 
@@ -785,6 +793,9 @@ RUN chmod -R o+rx /home/laradock/.nvm/versions/node/v12.6.0/lib/node_modules/pup
 #     && apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 \
 #       --no-install-recommends \
 #     && rm -rf /var/lib/apt/lists/*
+# Mount .npmrc into home folder
+COPY ./.npmrc /root/.npmrc
+COPY ./.npmrc /home/laradock/.npmrc
 
 
 ###########################################################################
